@@ -1,6 +1,10 @@
+import Card from "../components/product-card"
+
 const Page = () => {
     return (
-        <div>Hello World!</div>
+        <div>
+            <Card />
+        </div>
     )
 }
 
