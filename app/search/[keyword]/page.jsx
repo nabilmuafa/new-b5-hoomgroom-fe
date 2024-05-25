@@ -1,7 +1,3 @@
-import Link from "next/link";
-import AnimeList from "@/components/AnimeList";
-import Header from "@/components/AnimeList/Header";
-
 import ProductList from "../../components/product-card";
 import { getSearchedProduct } from "../../../libs/api-libs";
 
