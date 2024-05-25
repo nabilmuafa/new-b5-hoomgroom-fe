@@ -29,7 +29,7 @@ export default function Dropdown() {
             <MenuItem>
               {({ focus }) => (
                 <a
-                  href="#"
+                  href="/admin/product"
                   className={classNames(
                     focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-3 text-sm'
@@ -42,7 +42,7 @@ export default function Dropdown() {
             <MenuItem>
               {({ focus }) => (
                 <a
-                  href="#"
+                  href="/admin/promo-code"
                   className={classNames(
                     focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-3 text-sm'
@@ -55,7 +55,7 @@ export default function Dropdown() {
             <MenuItem>
               {({ focus }) => (
                 <a
-                  href="#"
+                  href="admin/product/statistics"
                   className={classNames(
                     focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-3 text-sm'
