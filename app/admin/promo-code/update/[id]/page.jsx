@@ -64,7 +64,6 @@ const UpdatePromoCode = () => {
                 }),
             });
             if (!response.ok) {
-                console.log(response.status);
                 response.text().then((result) => {
                     setErrorMessage(result)
                 });
