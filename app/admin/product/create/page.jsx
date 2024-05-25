@@ -1,7 +1,7 @@
-// pages/create.jsx
+'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const CreateProduct = () => {
     const [productName, setProductName] = useState('');
@@ -12,14 +12,56 @@ const CreateProduct = () => {
     const [productSales, setProductSales] = useState(0);
     const [productPicture, setProductPicture] = useState('');
 
+    const [realPriceError, setRealPriceError] = useState('');
+    const [discPriceError, setDiscPriceError] = useState('');
+    const [salesError, setSalesError] = useState('');
+    const [pictureURLError, setpictureURLError] = useState('');
+
     const router = useRouter();
+
+    function isValidUrl(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (error) {
+            return false;
+        }
+      }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // You can add form validation logic here if needed
+
+        setRealPriceError('');
+        setDiscPriceError('');
+        setSalesError('');
+        setpictureURLError('');
+
+        let isValid = true;
+        if (productDiscPrice > productRealPrice) {
+            setDiscPriceError('Discounted price cannot be higher than original price');
+            isValid = false;
+        }
+        if (productRealPrice < 0) {
+            setRealPriceError('Original price cannot be negative');
+            isValid = false;
+        }
+        if (productDiscPrice < 0) {
+            setDiscPriceError('Discounted price cannot be negative');
+            isValid = false;
+        }
+        if (productSales < 0) {
+            setSalesError('Total sales cannot be negative');
+            isValid = false;
+        }
+        if (!isValidUrl(productPicture)){
+            setpictureURLError('Must be a valid URL');
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
         try {
-            // Send the form data to your API endpoint to create the product
-            const response = await fetch('https://localhost:8080/admin/product/create', {
+            const response = await fetch('http://localhost:8080/admin/product/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +71,7 @@ const CreateProduct = () => {
                     realPrice: productRealPrice,
                     description: productDescription,
                     discPrice: productDiscPrice,
-                    tags: productTag.split(',').map(tag => tag.trim()),
+                    tag: productTag.split(',').map(tag => tag.trim()),
                     picture: productPicture,
                     sales: productSales
                 }),
@@ -37,11 +79,9 @@ const CreateProduct = () => {
             if (!response.ok) {
                 throw new Error('Failed to create product');
             }
-            // Redirect to the product list page after successful creation
-            router.push('/manage');
+            router.push('/admin/product');
         } catch (error) {
             console.error('Error creating product:', error);
-            // Handle error states or display error message to the user
         }
     };
 
@@ -70,6 +110,7 @@ const CreateProduct = () => {
                         className="w-full border border-gray-300 rounded-md px-3 py-2"
                         required
                     />
+                    {realPriceError && <p className="text-red-500 text-sm mt-1">{realPriceError}</p>}
                 </div>
                 <div>
                     <label htmlFor="productPicture" className="block mb-1">Product Picture URL</label>
@@ -78,9 +119,10 @@ const CreateProduct = () => {
                         id="productPicture"
                         value={productPicture}
                         onChange={(e) => setProductPicture(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 h-32"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2"
                         required
                     />
+                    {pictureURLError && <p className="text-red-500 text-sm mt-1">{pictureURLError}</p>}
                 </div>
                 <div>
                     <label htmlFor="productTag" className="block mb-1">Product Tags (comma-separated)</label>
@@ -112,6 +154,7 @@ const CreateProduct = () => {
                         onChange={(e) => setProductDiscPrice(e.target.value)}
                         className="w-full border border-gray-300 rounded-md px-3 py-2"
                     />
+                    {discPriceError && <p className="text-red-500 text-sm mt-1">{discPriceError}</p>}
                 </div>
                 <div>
                     <label htmlFor="productSales" className="block mb-1">Product Total Sales</label>
@@ -120,8 +163,9 @@ const CreateProduct = () => {
                         id="productSales"
                         value={productSales}
                         onChange={(e) => setProductSales(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 h-32"
+                        className="w-full border border-gray-300 rounded-md px-3 py-2"
                     />
+                    {salesError && <p className="text-red-500 text-sm mt-1">{salesError}</p>}
                 </div>
                 <div>
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
