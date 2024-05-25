@@ -1,7 +1,5 @@
-import Link from "next/link";
-
 const Button = ({ value, href}) => {
-    return <Link className="hover:text-emerald-500 duration-100" href={href}>{value}</Link>
+    return <a className="hover:text-emerald-500 duration-100" href={href}>{value}</a>
 }
 
 export default Button;
