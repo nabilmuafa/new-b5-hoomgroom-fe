@@ -1,6 +1,15 @@
-const Page = () => {
+import ProductList from "../components/product-card"
+import { getAllProducts, getFilteredProduct } from "../../libs/api-libs"
+import FilterButton from "../components/filter-button"
+
+const Page = async () => {
+
+    const allProducts = await getAllProducts()
+
     return (
-        <div>Hello World!</div>
+        <div className="gap-2 m-2">
+            <ProductList api={allProducts}/>
+        </div>
     )
 }
 
