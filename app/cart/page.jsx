@@ -1,10 +1,13 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from 'next/navigation';
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { AuthContext } from "../auth-provider";
 
 const Page = () => {
   const router = useRouter();
-  const { userId } = useParams();
+  const context = useContext(AuthContext);
+  const token = context.token[0];
+  const username = context.username[0];
   const [promoCodeUsed, setPromoCodeUsed] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [items, setItems] = useState([]);
@@ -15,8 +18,11 @@ const Page = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/cart/get/${userId}`, {
-        method: 'GET'
+      const response = await fetch(`http://localhost:8080/cart/get/${username}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (!response.ok) {
@@ -35,7 +41,7 @@ const Page = () => {
 
   useEffect(() => {
     fetchCart();
-  }, [userId]);
+  }, [username]);
 
   const handleBuy = async (e) => {
     e.preventDefault();
@@ -45,7 +51,7 @@ const Page = () => {
     }
 
     const payload = {
-        userId: parseInt(userId, 10),
+        username,
         promoCodeUsed,
         deliveryMethod
     }
@@ -55,6 +61,7 @@ const Page = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(payload),
         });
@@ -73,7 +80,7 @@ const Page = () => {
 
   const removeItem = async (productId) => {
     const payload = {
-      userId: parseInt(userId, 10),
+      username,
       productId
     }
 
@@ -82,6 +89,7 @@ const Page = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload),
       });
@@ -106,7 +114,7 @@ const Page = () => {
 
   const handleModalConfirm = async (amount) => {
     const payload = {
-      userId: parseInt(userId, 10),
+      username,
       amount: parseInt(amount, 10)
     }
 
@@ -115,6 +123,7 @@ const Page = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload),
       });

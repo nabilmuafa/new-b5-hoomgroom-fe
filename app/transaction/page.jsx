@@ -1,16 +1,19 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from 'next/navigation';
 
 const Page = () => {
-  const router = useRouter();
-  const { userId } = useParams();
+  const context = useContext(AuthContext);
+  const token = context.token[0];
+  const username = context.username[0];
   const [transactions, setTransactions] = useState([]);
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/transaction/get/${userId}`, {
-        method: 'GET'
+      const response = await fetch(`http://localhost:8080/transaction/get/${username}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (!response.ok) {
@@ -27,7 +30,7 @@ const Page = () => {
 
   useEffect(() => {
     fetchTransactions();
-  }, [userId]);
+  }, [username]);
 
   const formatDate = (dateString) => {
     return dateString.replace('T', ' ').substring(0, 19);
