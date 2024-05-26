@@ -66,7 +66,7 @@ const CreateProduct = () => {
         if (!isValid) return;
 
         try {
-            const response = await fetch('http://35.197.129.191/admin/product/create', {
+            const response = await fetch('https://api.b5-hoomgroom.com/admin/product/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

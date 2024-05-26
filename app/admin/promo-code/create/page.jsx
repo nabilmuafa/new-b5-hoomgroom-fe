@@ -34,7 +34,7 @@ const CreatePromoCode = () => {
         if (!isValid) return;
 
         try {
-            const response = await fetch('http://35.197.129.191/admin/promo-code/create', {
+            const response = await fetch('https://api.b5-hoomgroom.com/admin/promo-code/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
