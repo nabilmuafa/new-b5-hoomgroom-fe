@@ -71,7 +71,7 @@ const LoginForm = () => {
                     <button type="submit" className="mt-5 w-full rounded-md font-bold text-white bg-emerald-500 px-12 py-4 hover:bg-emerald-600 hover:text-white duration-200">Log in</button>
                 </div>
             </form>
-            <p className="text-sm text-center pt-8">Don"t have an account? <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700">Create one.</Link></p>
+            <p className="text-sm text-center pt-8">Don&apos;t have an account? <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700">Create one.</Link></p>
         </div>
     )
 }
