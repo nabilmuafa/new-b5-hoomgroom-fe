@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Button from "./Button";
 import { useContext } from "react";
 import { AuthContext } from "../../../auth-provider";
@@ -39,14 +39,14 @@ const RightSideNavbar = ({ isAuthenticated, setIsAuthenticated, username, role, 
     async function handleLogout(e) {
         e.preventDefault();
     
-        const res = await fetch('/api/auth/logout', {
-            method: 'GET',
+        const res = await fetch("/api/auth/logout", {
+            method: "GET",
         });
     
         if (res.ok) {
             localStorage.removeItem("token")
             setIsAuthenticated(false)
-            router.push('/');
+            router.push("/");
         }
         else {
             console.error("Log out failed")
