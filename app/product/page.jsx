@@ -9,7 +9,6 @@ const Page = async () => {
     return (
         <div className="gap-2 m-2">
             <ProductList api={allProducts}/>
-            <h2>Test</h2>
         </div>
     )
 }
