@@ -11,7 +11,7 @@ const Page = () => {
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/transaction/get/${username}`, {
+      const response = await fetch(`https://api.b5-hoomgroom.com/transaction/get/${username}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
