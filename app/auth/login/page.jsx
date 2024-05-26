@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "../../auth-provider";
@@ -29,10 +29,10 @@ const LoginForm = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const res = await fetch('/api/auth/login', {
-            method: 'POST',
+        const res = await fetch("/api/auth/login", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: (JSON.stringify({
                 "username":username,
@@ -46,7 +46,7 @@ const LoginForm = () => {
             setIsAuthenticated(true);
             setContextUsername(username);
             setRole(extractDetails(data.token).role);
-            router.push('/');
+            router.push("/");
         }
         else {
             console.error("Login failed")
@@ -71,7 +71,7 @@ const LoginForm = () => {
                     <button type="submit" className="mt-5 w-full rounded-md font-bold text-white bg-emerald-500 px-12 py-4 hover:bg-emerald-600 hover:text-white duration-200">Log in</button>
                 </div>
             </form>
-            <p className="text-sm text-center pt-8">Don't have an account? <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700">Create one.</Link></p>
+            <p className="text-sm text-center pt-8">Don"t have an account? <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700">Create one.</Link></p>
         </div>
     )
 }
