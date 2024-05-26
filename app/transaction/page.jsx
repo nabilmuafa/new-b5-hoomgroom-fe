@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import { AuthContext } from "../auth-provider";
 
 const Page = () => {
   const context = useContext(AuthContext);
