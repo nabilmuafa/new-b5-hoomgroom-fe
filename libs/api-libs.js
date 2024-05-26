@@ -4,7 +4,7 @@ export const getAllProducts = async () => {
     return products
 }
 
-export const getSearchedProduct = async (filterType, amount, fromLowest, keyword) => {
+export const getFilteredProduct = async (filterType, amount, fromLowest, keyword) => {
     const url = keyword ?
         `http://localhost:8080/admin/product/filter?filterType=${filterType}&amount=${amount}&fromLowest=${fromLowest}&keyword=${keyword}` :
         `http://localhost:8080/admin/product/filter?filterType=${filterType}&amount=${amount}&fromLowest=${fromLowest}`;

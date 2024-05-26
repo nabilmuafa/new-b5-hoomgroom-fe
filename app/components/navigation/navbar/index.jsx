@@ -23,7 +23,7 @@ const Navbar = () => {
                 <div className="">
                     <nav className="flex items-center gap-8 font-medium">
                         <Button value="Home" href="/" />
-                        <Button value="Products" href="#" />
+                        <Button value="Products" href="/product"/>
                         {(isAuthenticated && role === "ADMIN") ? <Dropdown /> : null}
                     </nav>
                 </div>

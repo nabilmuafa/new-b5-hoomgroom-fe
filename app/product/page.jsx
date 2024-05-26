@@ -1,14 +1,13 @@
 import ProductList from "../components/product-card"
-import Navbar from "../components/navigation/navbar"
-import { getAllProducts } from "../../libs/api-libs"
+import { getAllProducts, getFilteredProduct } from "../../libs/api-libs"
+import FilterButton from "../components/filter-button"
 
 const Page = async () => {
 
     const allProducts = await getAllProducts()
 
     return (
-        <div>
-            <h1>Test</h1>
+        <div className="gap-2 m-2">
             <ProductList api={allProducts}/>
             <h2>Test</h2>
         </div>

@@ -1,9 +1,28 @@
+'use client'
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const ProductList = ({api}) => {
 
+    const router = useRouter()
+
+    const navigator = (type, sorting) => {
+        event.preventDefault()
+        router.push(`/product/${type}/${sorting}`, undefined, { shallow: true })
+    }
+
     return (
+        <div>
+            <div className="flex">
+                <h1>Filter by: </h1>
+                <button onClick={(e) => {navigator("price", "asc")}}><button>Price (Asc)</button></button>
+                <button onClick={(e) => {navigator("price", "desc")}}><button>Price (Desc)</button></button>
+                <button onClick={(e) => {navigator("tag", "asc")}}><button>Tag (Asc)</button></button>
+                <button onClick={(e) => {navigator("tag", "desc")}}><button>Tag (Desc)</button></button>
+                <button onClick={(e) => {navigator("sales", "asc")}}><button>Sales (Asc)</button></button>
+                <button onClick={(e) => {navigator("sales", "desc")}}><button>Sales (Desc)</button></button>
+            </div>
         <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3 m-2">
             {api.map((product, index) => {
                 return (
@@ -17,6 +36,7 @@ const ProductList = ({api}) => {
                     </Link>
                 )        
             })}
+        </div>
         </div>
 
     )
