@@ -26,7 +26,7 @@ const UpdatePromoCode = () => {
 
     const fetchPromoCodes = async () => {
         try {
-            const response = await fetch(`http://35.197.129.191/admin/promo-code/update/${id}`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/promo-code/update/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -60,7 +60,7 @@ const UpdatePromoCode = () => {
         if (!isValid) return;
 
         try {
-            const response = await fetch('http://35.197.129.191/admin/promo-code/update/save', {
+            const response = await fetch('https://api.b5-hoomgroom.com/admin/promo-code/update/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

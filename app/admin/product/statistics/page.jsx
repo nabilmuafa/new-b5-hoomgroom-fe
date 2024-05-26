@@ -20,7 +20,7 @@ const Top10Products = () => {
         setError(null);
         
         try {
-            const response = await fetch(`http://35.197.129.191/admin/product/filter?filterType=${criteria}&amount=10&fromLowest=${order}`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/product/filter?filterType=${criteria}&amount=10&fromLowest=${order}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`

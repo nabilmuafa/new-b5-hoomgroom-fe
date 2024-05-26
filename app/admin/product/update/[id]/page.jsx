@@ -39,7 +39,7 @@ const UpdateProduct = () => {
 
     const fetchProduct = async () => {
         try {
-            const response = await fetch(`http://35.197.129.191/admin/product/update/${id}`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/product/update/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ const UpdateProduct = () => {
         if (!isValid) return;
 
         try {
-            const response = await fetch(`http://35.197.129.191/admin/product/update/save`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/product/update/save`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
