@@ -16,12 +16,12 @@ const ProductList = ({api}) => {
         <div>
             <div className="flex">
                 <h1>Filter by: </h1>
-                <button onClick={(e) => {navigator("price", "asc")}}><button>Price (Asc)</button></button>
-                <button onClick={(e) => {navigator("price", "desc")}}><button>Price (Desc)</button></button>
-                <button onClick={(e) => {navigator("tag", "asc")}}><button>Tag (Asc)</button></button>
-                <button onClick={(e) => {navigator("tag", "desc")}}><button>Tag (Desc)</button></button>
-                <button onClick={(e) => {navigator("sales", "asc")}}><button>Sales (Asc)</button></button>
-                <button onClick={(e) => {navigator("sales", "desc")}}><button>Sales (Desc)</button></button>
+                <button onClick={(e) => {navigator("price", "asc")}}>Price (Asc)</button>
+                <button onClick={(e) => {navigator("price", "desc")}}>Price (Desc)</button>
+                <button onClick={(e) => {navigator("tag", "asc")}}>Tag (Asc)</button>
+                <button onClick={(e) => {navigator("tag", "desc")}}>Tag (Desc)</button>
+                <button onClick={(e) => {navigator("sales", "asc")}}>Sales (Asc)</button>
+                <button onClick={(e) => {navigator("sales", "desc")}}>Sales (Desc)</button>
             </div>
         <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3 m-2">
             {api.map((product, index) => {
