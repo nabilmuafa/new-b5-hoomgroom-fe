@@ -1,9 +1,15 @@
-import Card from "../components/product-card"
+import ProductList from "../components/product-card"
+import { getAllProducts, getFilteredProduct } from "../../libs/api-libs"
+import FilterButton from "../components/filter-button"
 
-const Page = () => {
+const Page = async () => {
+
+    const allProducts = await getAllProducts()
+
     return (
-        <div>
-            <Card />
+        <div className="gap-2 m-2">
+            <ProductList api={allProducts}/>
+            <h2>Test</h2>
         </div>
     )
 }
