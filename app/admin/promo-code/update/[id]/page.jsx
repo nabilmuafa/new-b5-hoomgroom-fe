@@ -1,10 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { AuthContext } from "../../../../auth-provider";
 
 const UpdatePromoCode = () => {
     const { id } = useParams();
+    const context = useContext(AuthContext);
+    const token = context.token[0];
+    const role = context.role[0]
+
     const [promoCodeName, setPromoCodeName] = useState('');
     const [promoCodeEndDate, setPromoCodeEndDate] = useState('');
     const [promoCodeDescription, setPromoCodeDescription] = useState('');
@@ -21,7 +26,12 @@ const UpdatePromoCode = () => {
 
     const fetchPromoCodes = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/admin/promo-code/update/${id}`);
+            const response = await fetch(`http://35.197.129.191/admin/promo-code/update/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             if (!response.ok) {
                 throw new Error('Failed to fetch promo codes');
             }
@@ -50,10 +60,11 @@ const UpdatePromoCode = () => {
         if (!isValid) return;
 
         try {
-            const response = await fetch('http://localhost:8080/admin/promo-code/update/save', {
+            const response = await fetch('http://35.197.129.191/admin/promo-code/update/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     codeId: id,
@@ -75,61 +86,69 @@ const UpdatePromoCode = () => {
         }
     };
 
-    return (
-        <div className="max-w-md mx-auto mt-8">
-            <h1 className="text-3xl font-bold mb-4">Update Promo Code</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label htmlFor="promoCodeName" className="block mb-1">Promo Code Name</label>
-                    <input
-                        type="text"
-                        id="promoCodeName"
-                        value={promoCodeName}
-                        onChange={(e) => setPromoCodeName(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="promoCodeEndDate" className="block mb-1">Promo Code Valid Until</label>
-                    <input
-                        type="date"
-                        id="promoCodeEndDate"
-                        value={promoCodeEndDate}
-                        onChange={(e) => setPromoCodeEndDate(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="promoCodeMinimumPayment" className="block mb-1">Minimum Transaction To Use Promo Code</label>
-                    <input
-                        type="number"
-                        id="promoCodeMinimumPayment"
-                        value={promoCodeMinimumPayment}
-                        onChange={(e) => setPromoCodeMinimumPayment(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2"
-                        required
-                    />
-                    {minimumPaymentError && <p className="text-red-500 text-sm mt-1">{minimumPaymentError}</p>}
-                </div>
-                <div>
-                    <label htmlFor="promoCodeDescription" className="block mb-1">Promo Code Description</label>
-                    <textarea
-                        id="promoCodeDescription"
-                        value={promoCodeDescription}
-                        onChange={(e) => setPromoCodeDescription(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 h-32"
-                        required
-                    ></textarea>
-                </div>
-                <div>
-                {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Update</button>
-                </div>
-            </form>
-        </div>
-    );
+    if (role == 'ADMIN'){
+        return (
+            <div className="max-w-md mx-auto mt-8">
+                <h1 className="text-3xl font-bold mb-4">Update Promo Code</h1>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="promoCodeName" className="block mb-1">Promo Code Name</label>
+                        <input
+                            type="text"
+                            id="promoCodeName"
+                            value={promoCodeName}
+                            onChange={(e) => setPromoCodeName(e.target.value)}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="promoCodeEndDate" className="block mb-1">Promo Code Valid Until</label>
+                        <input
+                            type="date"
+                            id="promoCodeEndDate"
+                            value={promoCodeEndDate}
+                            onChange={(e) => setPromoCodeEndDate(e.target.value)}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="promoCodeMinimumPayment" className="block mb-1">Minimum Transaction To Use Promo Code</label>
+                        <input
+                            type="number"
+                            id="promoCodeMinimumPayment"
+                            value={promoCodeMinimumPayment}
+                            onChange={(e) => setPromoCodeMinimumPayment(e.target.value)}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
+                        {minimumPaymentError && <p className="text-red-500 text-sm mt-1">{minimumPaymentError}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="promoCodeDescription" className="block mb-1">Promo Code Description</label>
+                        <textarea
+                            id="promoCodeDescription"
+                            value={promoCodeDescription}
+                            onChange={(e) => setPromoCodeDescription(e.target.value)}
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 h-32"
+                            required
+                        ></textarea>
+                    </div>
+                    <div>
+                    {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
+                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Update</button>
+                    </div>
+                </form>
+            </div>
+        );
+    } else {
+        return (
+            <div className="max-w-4xl mx-auto px-4 py-8">
+                <h1 className="text-3xl font-bold mb-4">This Page Is Only For Admins</h1>
+            </div>
+        );
+    }
 };
 
 export default UpdatePromoCode;

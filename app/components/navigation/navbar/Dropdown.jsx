@@ -55,7 +55,7 @@ export default function Dropdown() {
             <MenuItem>
               {({ focus }) => (
                 <a
-                  href="admin/product/statistics"
+                  href="/admin/product/statistics"
                   className={classNames(
                     focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-3 text-sm'
