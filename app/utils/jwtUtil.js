@@ -5,7 +5,6 @@ export async function jwtIsValid(token) {
     const { payload, protectedHeader } = await jwtVerify(token, getSecret());
     return payload;
   } catch (err) {
-    console.log(err);
     return false;
   }
 }
