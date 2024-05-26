@@ -110,7 +110,7 @@ const CreatePromoCode = () => {
                     </div>
                     <div>
                     {errorMessage && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}
-                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
+                        <button type="submit" className="bg-emerald-500 text-white py-2 px-4 rounded">Create</button>
                     </div>
                 </form>
             </div>

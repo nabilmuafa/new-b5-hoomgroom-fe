@@ -63,7 +63,7 @@ const Top10Products = () => {
                         <option value="false">Descending</option>
                         <option value="true">Ascending</option>
                     </select>
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+                    <button type="submit" className="bg-emerald-500 text-white py-2 px-4 rounded">Submit</button>
                 </form>
                 
                 {loading && <p>Loading...</p>}

@@ -175,7 +175,7 @@ const CreateProduct = () => {
                         {salesError && <p className="text-red-500 text-sm mt-1">{salesError}</p>}
                     </div>
                     <div>
-                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Create</button>
+                        <button type="submit" className="bg-emerald-500 text-white py-2 px-4 rounded">Create</button>
                     </div>
                 </form>
             </div>

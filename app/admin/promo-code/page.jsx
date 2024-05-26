@@ -55,7 +55,7 @@ const ManagePromoCode = () => {
             <div className="max-w-4xl mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold mb-4">Promo Codes List</h1>
                 <Link href="/admin/promo-code/create">
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded inline-block mb-4">Create Promo Code</button>
+                    <button className="bg-emerald-500 text-white py-2 px-4 rounded inline-block mb-4">Create Promo Code</button>
                 </Link>
                 <table className="w-full border-collapse border border-gray-400">
                     <thead>
@@ -82,7 +82,7 @@ const ManagePromoCode = () => {
                                 </td>
                                 <td className="border border-gray-400 px-4 py-2">
                                 <Link href={`/admin/promo-code/update/${promoCode.codeId}`}>
-                                    <button className="bg-blue-500 text-white py-1 px-3 rounded">Update</button>
+                                    <button className="bg-emerald-500 text-white py-1 px-3 rounded">Update</button>
                                 </Link>
                                 </td>
                             </tr>
