@@ -16,7 +16,7 @@ const ManageProduct = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://35.197.129.191/admin/product/list', {
+            const response = await fetch('https://api.b5-hoomgroom.com/admin/product/list', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -34,7 +34,7 @@ const ManageProduct = () => {
 
     const deleteProduct = async (productId) => {
         try {
-            const response = await fetch(`http://35.197.129.191/admin/product/delete/${productId}`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/product/delete/${productId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

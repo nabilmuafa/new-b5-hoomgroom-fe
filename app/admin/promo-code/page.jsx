@@ -16,13 +16,17 @@ const ManagePromoCode = () => {
 
     const fetchPromoCodes = async () => {
         try {
-            const response = await fetch('http://35.197.129.191/admin/promo-code/manage', {
+            const response = await fetch('https://api.b5-hoomgroom.com/admin/promo-code/manage', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
             if (!response.ok) {
+                console.log(response.status)
+                response.text().then((result) => {
+                    console.log(result)
+                });
                 throw new Error('Failed to fetch promo codes');
             }
             const data = await response.json();
@@ -34,7 +38,7 @@ const ManagePromoCode = () => {
 
     const deletePromoCode = async (promoCodeId) => {
         try {
-            const response = await fetch(`http://35.197.129.191/admin/promo-code/delete/${promoCodeId}`, {
+            const response = await fetch(`https://api.b5-hoomgroom.com/admin/promo-code/delete/${promoCodeId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
