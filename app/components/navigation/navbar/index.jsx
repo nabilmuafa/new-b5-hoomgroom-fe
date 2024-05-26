@@ -1,6 +1,6 @@
 "use client";
 import Button from "./Button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../auth-provider";
 import { useRouter } from "next/navigation";
 import Dropdown from "./Dropdown";
@@ -9,33 +9,40 @@ import InputSearch from "./InputSearch";
 const Navbar = () => {
     const context = useContext(AuthContext);
     const [isAuthenticated, setIsAuthenticated] = context.isAuthenticated
+    const isLoading = context.isLoading[0]
     const username = context.username[0]
     const role = context.role[0]
     const router = useRouter();
     return (
         <header className="sticky top-0 z-10 border-b">
-            <div className="flex items-center justify-between px-8 max-w-screen-2xl mx-auto">
-                <div className="text-emerald-500 items-center py-6">
-                    <p className="font-bold text-xl">
+            <div className="flex justify-between items-center px-8 max-w-screen-2xl mx-auto">
+                <div className="flex items-center py-6">
+                    <p className="text-emerald-500 font-bold text-xl mr-8">
                         <a href="/">HoomGroom</a>
                     </p>
-                </div>
-                <div className="">
-                    <nav className="flex items-center gap-8 font-medium">
+                    <InputSearch />
+                    <nav className="flex items-center gap-8 font-medium ml-8">
                         <Button value="Home" href="/" />
                         <Button value="Products" href="/product"/>
                         {(isAuthenticated && role === "ADMIN") ? <Dropdown /> : null}
                     </nav>
                 </div>
                 <div className="auth">
-                    <RightSideNavbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} username={username} role={role} router={router} />
+                    <RightSideNavbar
+                        isAuthenticated={isAuthenticated} 
+                        setIsAuthenticated={setIsAuthenticated} 
+                        username={username}
+                        role={role}
+                        isLoading={isLoading}
+                        router={router}
+                    />
                 </div>
             </div>
         </header>
     );
 }
 
-const RightSideNavbar = ({ isAuthenticated, setIsAuthenticated, username, role, router }) => {
+const RightSideNavbar = ({ isAuthenticated, setIsAuthenticated, username, role, isLoading, router }) => {
     async function handleLogout(e) {
         e.preventDefault();
     
@@ -53,18 +60,14 @@ const RightSideNavbar = ({ isAuthenticated, setIsAuthenticated, username, role, 
         }
     }
 
-    if (!isAuthenticated) {
-        return (
-            <nav className="flex items-center gap-8 font-medium">
-                <InputSearch />
-                <Button value="Sign In" href="/auth/login" />
-                <Button value="Register" href="/auth/register" />
-            </nav>  
-        )
-    } else {
-        return (
-            <div className="flex items-center gap-2">
-                <InputSearch />
+    return (
+        <div className="flex items-center gap-2">
+            {isLoading ? 
+                <div className="animate-pulse flex space-x-4">
+                    <div className="rounded-full bg-slate-300 h-8 w-48"></div>
+                </div>
+            : ( isAuthenticated ? (
+                <>
                 <a href="/cart" className="hover:text-emerald-500 duration-100 pr-6">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
@@ -82,9 +85,15 @@ const RightSideNavbar = ({ isAuthenticated, setIsAuthenticated, username, role, 
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                     </svg>
                 </button>
-            </div>
-        )
-    }
+                </>
+            ) : (
+                <nav className="flex items-center gap-8 font-medium">
+                    <Button value="Sign In" href="/auth/login" />
+                    <Button value="Register" href="/auth/register" />
+                </nav>  
+            ))}
+        </div>
+    )
 }
 
 export default Navbar;

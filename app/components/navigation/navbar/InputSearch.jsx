@@ -16,16 +16,18 @@ const InputSearch = () => {
     }
 
     return (
-        <form className="relative" onSubmit={handleSearch}>
-            <input 
-                placeholder="Cari produk..." 
-                className="rounded p-2 w-full"
-                ref={searchRef}>
-            </input>
-            <button className="absolute end-3 top-2 hover:scale-125 transition:ease-in" onClick={handleSearch}>
-                <MagnifyingGlass size={25} />
-            </button>
-        </form>
+        <div className="rounded-full py-2 px-4 w-full bg-slate-200 text-black">
+            <form className="flex items-center" onSubmit={handleSearch}>
+                <input 
+                    placeholder="Cari produk..." 
+                    className="bg-slate-200 outline-none"
+                    ref={searchRef}>
+                </input>
+                <button className="pl-2 text-emerald-500" onClick={handleSearch}>
+                    <MagnifyingGlass size={20} />
+                </button>
+            </form>
+        </div>
     )
 }
 

@@ -10,7 +10,7 @@ export default function Dropdown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 hover:text-emerald-500 duration-100 items-center">
+        <MenuButton className="flex w-full whitespace-nowrap justify-center gap-x-1.5 hover:text-emerald-500 duration-100 items-center">
           Admin Dashboard
           <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
         </MenuButton>

@@ -6,14 +6,24 @@ import { extractDetails } from "./utils/jwtUtil";
 
 export const AuthContext = createContext();
 
-export default function AuthProvider({ children, userDetails }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    window.localStorage.getItem("token") !== null
-  );
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const details = extractDetails(token);
-  const [username, setUsername] = useState(details.username);
-  const [role, setRole] = useState(details.role);
+export default function AuthProvider({ children }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(null);
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const storedToken = window.localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken), setIsAuthenticated(true);
+      const details = extractDetails(storedToken);
+      setUsername(details.username);
+      setRole(details.role);
+    }
+    setIsLoading(false);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -22,6 +32,7 @@ export default function AuthProvider({ children, userDetails }) {
         token: [token, setToken],
         username: [username, setUsername],
         role: [role, setRole],
+        isLoading: [isLoading, setIsLoading],
       }}
     >
       <Navbar />
