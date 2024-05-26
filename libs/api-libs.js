@@ -15,7 +15,7 @@ export const getFilteredProduct = async (filterType, amount, fromLowest, keyword
 }
 
 export const getDetailProduct = async (productId) => {
-    const response = await fetch(`http://localhost:8080/admin/product/update/${productId}`)
+    const response = await fetch(`http://35.197.129.191/admin/product/update/${productId}`)
     const product = await response.json()
     return product
 }
