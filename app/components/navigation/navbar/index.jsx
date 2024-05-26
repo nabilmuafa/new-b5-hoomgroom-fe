@@ -14,8 +14,8 @@ const Navbar = () => {
     const role = context.role[0]
     const router = useRouter();
     return (
-        <header className="sticky top-0 z-10 border-b">
-            <div className="flex justify-between items-center px-8 max-w-screen-2xl mx-auto">
+        <header className="sticky top-0 z-10 border-b bg-white">
+            <div className="flex justify-between items-center px-8 max-w-screen-2xl mx-auto bg-white">
                 <div className="flex items-center py-6">
                     <p className="text-emerald-500 font-bold text-xl mr-8">
                         <a href="/">HoomGroom</a>

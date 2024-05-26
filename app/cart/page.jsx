@@ -18,7 +18,7 @@ const Page = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/cart/get/${username}`, {
+      const response = await fetch(`https://api.b5-hoomgroom.com/cart/get/${username}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -57,7 +57,7 @@ const Page = () => {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/transaction/create', {
+        const response = await fetch('https://api.b5-hoomgroom.com/transaction/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const Page = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/cart/delete-items', {
+      const response = await fetch('https://api.b5-hoomgroom.com/cart/delete-items', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const Page = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/cart/topup', {
+      const response = await fetch('https://api.b5-hoomgroom.com/cart/topup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
