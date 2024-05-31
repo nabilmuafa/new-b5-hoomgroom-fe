@@ -12,7 +12,7 @@ const InputSearch = () => {
         event.preventDefault()
         const keyword = searchRef.current.value
         if (!keyword || keyword.trim() === "") return
-        router.push(`/search/${keyword}`)
+        router.push(`/product?search=${keyword}`)
     }
 
     return (
@@ -23,7 +23,7 @@ const InputSearch = () => {
                     className="bg-slate-200 outline-none"
                     ref={searchRef}>
                 </input>
-                <button className="pl-2 text-emerald-500" onClick={handleSearch}>
+                <button type="submit" className="pl-2 text-emerald-500" onClick={handleSearch}>
                     <MagnifyingGlass size={20} />
                 </button>
             </form>

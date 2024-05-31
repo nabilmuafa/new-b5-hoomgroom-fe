@@ -4,18 +4,16 @@ import ProductList, { ProductListPlaceholder } from "../components/product-card"
 import FilterBar from "../components/FilterBar"
 import { getAllProducts, getFilteredProduct } from "../../libs/api-libs"
 import { useEffect, useState } from "react"
+import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
     const [sortCategory, setSortCategory] = useState("");
     const [sortOrder, setSortOrder] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [allProducts, setAllProducts] = useState(null);
-
-    async function fetchData() {
-        const products = await getAllProducts();
-        setAllProducts(products);
-        setIsLoading(false);
-    }
+    const searchParams = useSearchParams()
+ 
+    const keyword = searchParams.get('search')
 
     async function handleSort() {
         setIsLoading(true);
@@ -36,8 +34,20 @@ const Page = () => {
     }
 
     useEffect(() => {
+        async function fetchData() {
+            let products = {}
+            if (!keyword) {
+                products = await getAllProducts();
+            }
+            else {
+                products = await getFilteredProduct("search", 10, true, `${keyword}`);
+            }
+            setAllProducts(products);
+            setIsLoading(false);
+        }
+
         fetchData();
-    }, [])
+    }, [keyword])
 
     return (
         <div className="flex max-w-screen-2xl mx-auto m-8 gap-8 px-8">

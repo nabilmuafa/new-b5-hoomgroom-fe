@@ -1,27 +1,10 @@
 'use client'
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 const ProductList = ({api}) => {
-    const router = useRouter()
-
-    const navigator = (type, sorting) => {
-        event.preventDefault()
-        router.push(`/product/${type}/${sorting}`, undefined, { shallow: true })
-    }
-
-    return (
+    return api.length !== 0 ? (
         <div className="flex-shrink">
-            {/* <div className="flex">
-                <h1>Filter by: </h1>
-                <button onClick={(e) => {navigator("price", "asc")}}>Price (Asc)</button>
-                <button onClick={(e) => {navigator("price", "desc")}}>Price (Desc)</button>
-                <button onClick={(e) => {navigator("tag", "asc")}}>Tag (Asc)</button>
-                <button onClick={(e) => {navigator("tag", "desc")}}>Tag (Desc)</button>
-                <button onClick={(e) => {navigator("sales", "asc")}}>Sales (Asc)</button>
-                <button onClick={(e) => {navigator("sales", "desc")}}>Sales (Desc)</button>
-            </div> */}
             <div className="grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-3">
                 {api.map((product, index) => {
                     let price = "Rp" + new Intl.NumberFormat("id-ID", {
@@ -48,7 +31,7 @@ const ProductList = ({api}) => {
             </div>
         </div>
 
-    )
+    ) : <div>kosong</div>;
 }
 
 export function ProductListPlaceholder() {
