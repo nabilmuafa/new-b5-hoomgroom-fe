@@ -20,16 +20,30 @@ const Page = () => {
 
         let newProducts = {};
 
-        if (!sortOrder) {
-            setSortOrder("asc")
-        } 
         if (sortCategory) {
-            newProducts = await getFilteredProduct(sortCategory, 12, sortOrder === "asc")
+            newProducts = await getFilteredProduct(sortCategory, 12, sortOrder === "" || sortOrder === "asc")
         }
         else {
             newProducts = await getAllProducts();
         }
         setAllProducts(newProducts);
+        setIsLoading(false);
+    }
+
+    async function clearSort() {
+        setIsLoading(true);
+        setSortCategory("");
+        setSortOrder("");
+
+        let products = {}
+
+        if (!keyword) {
+            products = await getAllProducts();
+        }
+        else {
+            products = await getFilteredProduct("search", 10, true, `${keyword}`);
+        }
+        setAllProducts(products);
         setIsLoading(false);
     }
 
@@ -51,7 +65,14 @@ const Page = () => {
 
     return (
         <div className="flex max-w-screen-2xl mx-auto m-8 gap-8 px-8">
-            <FilterBar setSortCategory={setSortCategory} setSortOrder={setSortOrder} handleSort={handleSort} />
+            <FilterBar 
+                sortCategory={sortCategory}
+                setSortCategory={setSortCategory}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+                handleSort={handleSort}
+                clearSort={clearSort}
+            />
             <div className="flex-grow">
                 {isLoading ? <ProductListPlaceholder /> : <ProductList api={allProducts}/>}
             </div>

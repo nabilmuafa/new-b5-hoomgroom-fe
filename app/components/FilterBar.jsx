@@ -24,7 +24,7 @@ const SORT_ORDER = [
     }
 ]
 
-const FilterBar = ({ setSortCategory, setSortOrder, handleSort }) => {
+const FilterBar = ({ sortCategory, setSortCategory, sortOrder, setSortOrder, handleSort, clearSort }) => {
     return (
         <aside className="flex-grow w-full max-w-xs">
             <div className="flex flex-col rounded-md border text-sm p-8">
@@ -33,10 +33,7 @@ const FilterBar = ({ setSortCategory, setSortOrder, handleSort }) => {
                     <ul className="font-medium py-2">
                         {CATEGORIES.map((el) => 
                             <li key={el.value}>
-                                <div className="flex items-center gap-2 py-1">
-                                    <input id={el.value} value={el.value} onChange={(e) => setSortCategory(e.target.value)} type="radio" name="sort" className="w-4 h-4 rounded accent-emerald-600" />
-                                    <label htmlFor={el.value}>{el.name}</label>
-                                </div>
+                                <RadioInput el={el} radioName="sort" state={sortCategory} setState={setSortCategory} />
                             </li>
                         )}
                     </ul>
@@ -46,18 +43,31 @@ const FilterBar = ({ setSortCategory, setSortOrder, handleSort }) => {
                     <ul className="font-medium py-2">
                         {SORT_ORDER.map((el) => 
                             <li key={el.value}>
-                                <div className="flex items-center gap-2 py-1">
-                                    <input id={el.value} value={el.value} onChange={(e) => setSortOrder(e.target.value)} type="radio" name="order" className="w-4 h-4 rounded accent-emerald-600" />
-                                    <label htmlFor={el.value}>{el.name}</label>
-                                </div>
+                                <RadioInput el={el} radioName="order" state={sortOrder} setState={setSortOrder} />
                             </li>
                         )}
                     </ul>
                 </div>
-                <button onClick={handleSort} className="border bg-emerald-500 font-medium rounded-md text-white py-2 px-3 hover:bg-emerald-600">Apply Sort</button>
+                <button onClick={handleSort} className="border bg-emerald-500 font-medium rounded-md text-white py-2 px-3 hover:bg-emerald-600 mb-2">Apply Sort</button>
+                <button onClick={clearSort} className="border border-emerald-500 bg-white font-medium rounded-md text-emerald-500 py-2 px-3 hover:bg-gray-300">Clear Sort</button>
             </div>
         </aside>
     )
 }
 
+const RadioInput = ({el, radioName, state, setState}) => {
+    return (
+        <div className="flex items-center gap-2 py-1">
+            <input 
+                id={el.value}
+                value={el.value}
+                checked={state === el.value}
+                onChange={(e) => setState(e.target.value)}
+                type="radio"
+                name={radioName}
+                className="w-4 h-4 rounded accent-emerald-600" />
+            <label htmlFor={el.value}>{el.name}</label>
+        </div>
+    )
+}
 export default FilterBar;
