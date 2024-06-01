@@ -31,7 +31,21 @@ const ProductList = ({api}) => {
             </div>
         </div>
 
-    ) : <div>kosong</div>;
+    ) : <div className="flex-grow">
+        <div className="text-center">
+            <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width={75} height={75}>
+                <path
+                    style={{lineHeight: "normal",WebkitTextIndent: "0",textIndent: "0",WebkitTextAlign: "start",textAlign: "start",WebkitTextDecorationLine: "none",textDecorationLine: "none",WebkitTextDecorationStyle: "solid",textDecorationStyle: "solid",WebkitTextDecorationColor: "#6b7280",textDecorationColor: "#6b7280",WebkitTextTransform: "none",textTransform: "none",blockProgression: "tb",isolation: "auto",mixBlendMode: "normal"}}
+                    d="M19 3C13.489 3 9 7.489 9 13c0 2.397.851 4.597 2.264 6.322l-7.971 7.971 1.414 1.414 7.97-7.97A9.947 9.947 0 0019 23c5.511 0 10-4.489 10-10S24.511 3 19 3zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8zm-3 5a1 1 0 00-1 1 1 1 0 001 1 1 1 0 001-1 1 1 0 00-1-1zm6 0a1 1 0 00-1 1 1 1 0 001 1 1 1 0 001-1 1 1 0 00-1-1zm-3 4c-2.207 0-3.654 1.244-3.654 1.244a1 1 0 101.308 1.512S17.515 16 19 16s2.346.756 2.346.756a1 1 0 101.308-1.512S21.207 14 19 14z"
+                    fill="#9ca3af"
+                    fontFamily="sans-serif"
+                    fontWeight="400"
+                    overflow="visible"
+                    ></path>
+            </svg>
+            <p className="text-gray-500 mt-4">The product you&#39;re looking for isn&#39;t yet available at HoomGroom.</p>
+        </div>
+    </div>;
 }
 
 export function ProductListPlaceholder() {

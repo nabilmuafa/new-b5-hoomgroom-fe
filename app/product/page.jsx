@@ -5,6 +5,7 @@ import FilterBar from "../components/FilterBar"
 import { getAllProducts, getFilteredProduct } from "../../libs/api-libs"
 import { useEffect, useState } from "react"
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react';
 
 const Page = () => {
     const [sortCategory, setSortCategory] = useState("");
@@ -64,19 +65,21 @@ const Page = () => {
     }, [keyword])
 
     return (
-        <div className="flex max-w-screen-2xl mx-auto m-8 gap-8 px-8">
-            <FilterBar 
-                sortCategory={sortCategory}
-                setSortCategory={setSortCategory}
-                sortOrder={sortOrder}
-                setSortOrder={setSortOrder}
-                handleSort={handleSort}
-                clearSort={clearSort}
-            />
-            <div className="flex-grow">
-                {isLoading ? <ProductListPlaceholder /> : <ProductList api={allProducts}/>}
+        <Suspense>
+            <div className="flex max-w-screen-2xl mx-auto m-8 gap-8 px-8">
+                <FilterBar 
+                    sortCategory={sortCategory}
+                    setSortCategory={setSortCategory}
+                    sortOrder={sortOrder}
+                    setSortOrder={setSortOrder}
+                    handleSort={handleSort}
+                    clearSort={clearSort}
+                    />
+                <div className="flex-grow">
+                    {isLoading ? <ProductListPlaceholder /> : <ProductList api={allProducts}/>}
+                </div>
             </div>
-        </div>
+        </Suspense>
     )
 }
 
