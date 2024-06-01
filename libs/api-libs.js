@@ -1,7 +1,10 @@
 export const getAllProducts = async () => {
-  const response = await fetch("https://api.b5-hoomgroom/admin/product/list", {
-    next: { cache: "no-store", revalidate: 0 },
-  });
+  const response = await fetch(
+    "https://api.b5-hoomgroom.com/admin/product/list",
+    {
+      next: { cache: "no-store", revalidate: 0 },
+    }
+  );
   const products = await response.json();
   return products;
 };
