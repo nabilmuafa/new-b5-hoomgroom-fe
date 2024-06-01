@@ -5,7 +5,7 @@ import Link from "next/link"
 const ProductList = ({api}) => {
     return api.length !== 0 ? (
         <div className="flex-shrink">
-            <div className="grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-3">
+            <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
                 {api.map((product, index) => {
                     let price = "Rp" + new Intl.NumberFormat("id-ID", {
                         minimumFractionDigits: 0,
